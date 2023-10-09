@@ -22,15 +22,39 @@ pythonnotes.pyadd--title"новаязаметка"– msg"телоновой з�
 
 """
 
+import csv
 from datetime import datetime
 
+fileBase = "Base.csv"
+x = []
+
+
 def writer():
-    
+    readOfFile()
     print("Заметка")
     a = input("Title \n")
     b = input("Text \n")
-    c = datetime.today()
-    print(a, b, c)
-    base = {"DATE" : c, "TITLE" : a, "TEXT": b}
+    c = datetime.today().strftime("%d/%m/%y %H:%M")
+    x.append( {"ID": len(x), "DATE" : c, "TITLE" : a, "TEXT" : b} )
+    writeOfFile()
 
-    return base
+
+
+def writeOfFile():
+
+    with open(fileBase , "w", newline="") as file:
+
+        # readOfFile()
+        columns = ["ID","DATE","TITLE","TEXT"]
+        write = csv.DictWriter(file, fieldnames=columns)
+        write.writeheader()
+
+        write.writerows(x)
+
+def readOfFile():
+
+    with open(fileBase , "r", newline="") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            x.append(row)
