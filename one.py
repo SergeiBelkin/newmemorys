@@ -58,3 +58,68 @@ def readOfFile():
 
         for row in reader:
             x.append(row)
+
+def printList ():
+
+    readOfFile()
+    for note in x:
+        print(note["ID"],note["DATE"])
+
+def redNote (number):
+
+    readOfFile()
+    for note in x:
+        if note["ID"] == str(number):
+            index = x.index(note)
+            print(index)
+            print(note)
+            del x[index]
+        writeOfFile()
+
+def printNote (number):
+
+    readOfFile()
+    for note in x:
+        if note["ID"] == str(number):
+
+            print(note)
+
+
+def main():
+
+    while True:
+        print('Выберите действие:')
+        print('1. Вывести все заметки')
+        print('2. Вывести конкретную заметку')
+        print('3. Добавить новую заметку')
+        print('4. Редактировать заметку')
+        print('5. Удалить заметку')
+        print('6. Выход')
+
+        numChoice = input("Вы ввели: ")
+        if numChoice == "1":
+            printList()
+
+        elif numChoice == "2":
+            num = input("введите номер заметки: ")
+            printNote(num)
+
+        elif numChoice == "3":
+            writer()
+
+        elif numChoice == "4":
+            num = input("введите номер заметки: ")
+            redNote(num)
+            writer()
+
+        elif numChoice == "5":
+            num = input("введите номер заметки: ")
+            redNote(num)
+
+        elif numChoice == "6":
+            break
+
+        else: print("не допустимая команда")
+
+# main()
+writer()
