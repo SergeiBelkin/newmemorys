@@ -50,6 +50,7 @@ def writeOfFile():
         write.writeheader()
 
         write.writerows(x)
+    x.clear
 
 def readOfFile():
 
@@ -58,12 +59,14 @@ def readOfFile():
 
         for row in reader:
             x.append(row)
+    
 
 def printList ():
 
     readOfFile()
     for note in x:
         print(note["ID"],note["DATE"])
+    x.clear()
 
 def redNote (number):
 
@@ -71,10 +74,11 @@ def redNote (number):
     for note in x:
         if note["ID"] == str(number):
             index = x.index(note)
-            print(index)
+            # print(index)
             print(note)
             del x[index]
-        writeOfFile()
+    print(x)
+    
 
 def printNote (number):
 
@@ -83,6 +87,7 @@ def printNote (number):
         if note["ID"] == str(number):
 
             print(note)
+    x.clear()
 
 
 def main():
@@ -96,9 +101,10 @@ def main():
         print('5. Удалить заметку')
         print('6. Выход')
 
-        numChoice = input("Вы ввели: ")
+        numChoice = input()
         if numChoice == "1":
             printList()
+            
 
         elif numChoice == "2":
             num = input("введите номер заметки: ")
@@ -115,11 +121,13 @@ def main():
         elif numChoice == "5":
             num = input("введите номер заметки: ")
             redNote(num)
+            writeOfFile()
 
         elif numChoice == "6":
             break
 
         else: print("не допустимая команда")
 
-# main()
-writer()
+main()
+# writer()
+# redNote(0)
